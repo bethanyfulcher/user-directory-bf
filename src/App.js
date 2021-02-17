@@ -3,25 +3,15 @@ import API from "./utils/API"
 import TableRow from "./components/TableRow"
 
 class App extends Component {
+
   state = {
     employees: []
   };
 
   componentDidMount() {
-    this.fillEmployeesArray()
-  }
-
-  fillEmployeesArray = () => {
-    let filledArray = []
-    for (var i = 0; i < 10; i++) {
-      API.getRandomUser()
-        .then(res => filledArray.push(res.data.results))
-        .catch(err => console.log(err))
-    }
-    console.log("filled array")
-    console.log(filledArray)
-    this.setState({ employees: filledArray })
-    console.log(this.state.employees)
+    API.getRandomUsers()
+      .then(res => this.setState({employees: res.data.results}))
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -39,15 +29,9 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>image</td>
-              <td>first name</td>
-              <td>last name</td>
-              <td>my email</td>
-              <td>gender</td>
-            </tr>
             {this.state.employees.map(employee => (
               <TableRow
+                key={employee.id.value}
                 firstName={employee.name.first}
                 lastName={employee.name.last}
                 email={employee.email}
@@ -57,17 +41,6 @@ class App extends Component {
             ))}
           </tbody>
         </table>
-
-
-        {/* {this.state.employees.map(employee => (
-        <TableRow 
-          firstName={employee.name.first}
-          lastName={employee.name.last}
-          email={employee.email}
-          picture={employee.picture.thumbnail}
-          gender={employee.gender}
-        />
-      ))} */}
       </div>
     );
   }

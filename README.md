@@ -14,7 +14,7 @@
   # Description:
   With this app, a random Employee Directory will be rendered on page load. You can view the employees, sort by name, or filter by gender.
   
-  ![Screenshot](public/readmeScreenshot.png)
+  ![Screenshot](public/readmeScreenshot.PNG)
   
   # Installation:
   n/a
